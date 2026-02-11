@@ -1,5 +1,8 @@
-﻿using VHBurguer.Domains;
+﻿using System.Security.Cryptography;
+using System.Text;
+using VHBurguer.Domains;
 using VHBurguer.DTOs;
+using VHBurguer.Exceptions;
 using VHBurguer.Interfaces;
 
 namespace VHBurguer.Applications.Services
@@ -34,6 +37,47 @@ namespace VHBurguer.Applications.Services
 
             List<LerUsuarioDto> usuariosDto = usuarios.Select(usuarioBanco => LerDto(usuarioBanco)).ToList();
             return usuariosDto;
+        }
+
+        private static void ValidarEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
+            {
+                throw new DomainException("Email Inválido.");
+            }
+        }
+
+        private static byte[] HashSenha(string senha)
+        {
+            if (string.IsNullOrEmpty(senha))
+            {
+                throw new DomainException("Senha é obrigatória.");
+            }
+            using var sha256 = SHA256.Create();
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(senha));
+        }
+
+        public LerUsuarioDto ObterPorId(int id)
+        {
+            Usuario usuario = _repository.ObterPorId(id);
+
+            if(usuario == null)
+            {
+                throw new DomainException("Usuário não existe.");
+            }
+
+            return LerDto(usuario);
+        }
+        public LerUsuarioDto ObterPorEmail(string email)
+        {
+            Usuario usuario = _repository.ObterPorEmail(email);
+
+            if (usuario == null)
+            {
+                throw new DomainException("Usuário não existe.");
+            }
+
+            return LerDto(usuario);
         }
     }
 }
