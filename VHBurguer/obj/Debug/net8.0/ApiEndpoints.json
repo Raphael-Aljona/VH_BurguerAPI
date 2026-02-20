@@ -37,6 +37,42 @@
   },
   {
     "ContainingType": "VHBurguer.Controllers.ProdutoController",
+    "Method": "AdicionarImagem",
+    "RelativePath": "api/Produto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Nome",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Descricao",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Preco",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Imagem",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VHBurguer.Controllers.ProdutoController",
     "Method": "ObterPorId",
     "RelativePath": "api/Produto/{id}",
     "HttpMethod": "GET",
@@ -60,6 +96,68 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "VHBurguer.Controllers.ProdutoController",
+    "Method": "AtualizarProduto",
+    "RelativePath": "api/Produto/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Nome",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Descricao",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Preco",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Imagem",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "StatusProduto",
+        "Type": "System.Nullable\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VHBurguer.Controllers.ProdutoController",
+    "Method": "RemoverProduto",
+    "RelativePath": "api/Produto/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "VHBurguer.Controllers.ProdutoController",

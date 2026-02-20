@@ -95,6 +95,65 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "type": "string"
+                  },
+                  "Descricao": {
+                    "type": "string"
+                  },
+                  "Preco": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "CategoriaIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Preco": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                },
+                "CategoriaIds": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/Produto/{id}": {
@@ -133,6 +192,103 @@
                 }
               }
             }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nome": {
+                    "type": "string"
+                  },
+                  "Descricao": {
+                    "type": "string"
+                  },
+                  "Preco": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "CategoriaIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  },
+                  "StatusProduto": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "encoding": {
+                "Nome": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Preco": {
+                  "style": "form"
+                },
+                "Imagem": {
+                  "style": "form"
+                },
+                "CategoriaIds": {
+                  "style": "form"
+                },
+                "StatusProduto": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
