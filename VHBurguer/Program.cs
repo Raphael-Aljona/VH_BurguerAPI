@@ -24,7 +24,8 @@ builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ProdutoService>();
 
-//builder.Services.AddScoped<AutenticacaoService>();
+builder.Services.AddScoped<GeradorTokenJwt>();
+builder.Services.AddScoped<AutenticacaoService>();
 
 // Configura o sistema de autenticação da aplicação.
 // Aqui estamos dizendo que o tipo de autenticação padrão será JWT Bearer.
