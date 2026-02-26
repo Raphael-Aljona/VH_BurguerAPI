@@ -19,7 +19,7 @@ namespace VHBurguer.DTOs.ProdutoDto
         public List<string> Categorias { get; set; } = new();
 
         public int? UsuarioID { get; set; }
-        public string? UsuarioNome { get; set; }
+        public string? UsuarioNome { get; set; } = null;
         public string? UsuarioEmail { get; set; }  
 
     }
