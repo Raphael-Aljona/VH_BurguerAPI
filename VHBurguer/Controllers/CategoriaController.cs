@@ -29,14 +29,19 @@ namespace VHBurguer.Controllers
         [HttpGet("{id}")]
         public ActionResult<LerCategoriaDto> ObterPorId(int id)
         {
-            LerCategoriaDto categoria = _service.ObterPorId(id);
-
-            if (categoria == null)
+            try
             {
-                return NotFound();
+                LerCategoriaDto categoria = _service.ObterPorId(id);
+
+                return Ok(categoria);
+
+            }
+            catch (DomainException ex)
+            {
+                return NotFound(ex.Message);
+
             }
 
-            return Ok(categoria);
         }
 
         [HttpPost]

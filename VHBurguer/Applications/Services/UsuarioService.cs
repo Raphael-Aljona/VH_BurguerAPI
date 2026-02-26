@@ -47,6 +47,14 @@ namespace VHBurguer.Applications.Services
             }
         }
 
+        private static void ValidarNome(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome) || !nome.Contains("@"))
+            {
+                throw new DomainException("Nome Inválido.");
+            }
+        }
+
         private static byte[] HashSenha(string senha)
         {
             if (string.IsNullOrEmpty(senha))
@@ -83,6 +91,7 @@ namespace VHBurguer.Applications.Services
         public LerUsuarioDto Adicionar(CriarUsuarioDto usuarioDto)
         {
             ValidarEmail(usuarioDto.Email);
+            ValidarNome(usuarioDto.Nome);
 
             if (_repository.EmailExiste(usuarioDto.Email)) throw new DomainException("Email já cadastrado!");
 

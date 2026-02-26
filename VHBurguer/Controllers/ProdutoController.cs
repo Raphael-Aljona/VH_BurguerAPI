@@ -58,9 +58,16 @@ namespace VHBurguer.Controllers
         [HttpGet("{id}")]
         public ActionResult<LerProdutoDto> ObterPorId(int id)
         {
-            LerProdutoDto produtoDto = _service.ObterPorId(id);
+            try
+            {
+                LerProdutoDto produtoDto = _service.ObterPorId(id);
 
-            return StatusCode(200, produtoDto);
+                return StatusCode(200, produtoDto);
+            } catch (DomainException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            
         }
 
         [HttpPost]

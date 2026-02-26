@@ -10,7 +10,8 @@ namespace VHBurguer.Controllers
     {
         private readonly LogAlteracaoProdutoService _service;
 
-        public LogProdutoController(LogAlteracaoProdutoService service) {
+        public LogProdutoController(LogAlteracaoProdutoService service)
+        {
             _service = service;
         }
 
@@ -23,7 +24,16 @@ namespace VHBurguer.Controllers
         [HttpGet("produto/{id}")]
         public ActionResult ListarPorProduto(int id)
         {
-            return Ok(_service.ListarPorProduto(id));
+            try
+            {
+                return Ok(_service.ListarPorProduto(id));
+
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+
         }
     }
 }

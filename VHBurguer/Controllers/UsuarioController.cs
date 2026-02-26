@@ -28,21 +28,30 @@ namespace VHBurguer.Controllers
         [HttpGet("{id}")]
         public ActionResult<LerUsuarioDto> ObterPorId(int id)
         {
-            LerUsuarioDto usuarioDto = _service.ObterPorId(id);
+            try
+            {
+                LerUsuarioDto usuarioDto = _service.ObterPorId(id);
+                return Ok(usuarioDto);
 
-            if (usuarioDto == null) return NotFound();
-
-            return Ok(usuarioDto);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("email/{email}")]
         public ActionResult<LerUsuarioDto> ObterPorEmail(string email)
         {
-            LerUsuarioDto usuarioDto = _service.ObterPorEmail(email);
-
-            if (usuarioDto == null) return NotFound();
-
-            return Ok(usuarioDto);
+            try
+            {
+                LerUsuarioDto usuarioDto = _service.ObterPorEmail(email);
+                return Ok(usuarioDto);
+            }
+            catch (DomainException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -88,11 +97,11 @@ namespace VHBurguer.Controllers
             {
                 _service.Remover(id);
                 return StatusCode(204, id);
-            }catch (DomainException ex)
+            }
+            catch (DomainException ex)
             {
                 return BadRequest(ex.Message);
             }
         }
     }
 }
-    
