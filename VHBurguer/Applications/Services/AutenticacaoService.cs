@@ -1,6 +1,7 @@
 ﻿using VHBurguer.Applications.Authentication;
 using VHBurguer.Domains;
 using VHBurguer.DTOs.AutenticacaoDto;
+using VHBurguer.DTOs.UsuarioDto;
 using VHBurguer.Exceptions;
 using VHBurguer.Interfaces;
 
@@ -29,9 +30,11 @@ namespace VHBurguer.Applications.Services
 
         public TokenDto Login(LoginDto loginDto)
         {
-            Usuario usuario = _repository.ObterPorEmail(loginDto.Email);
+            Usuario? usuario = _repository.ObterPorEmail(loginDto.Email);
 
             if (usuario == null) throw new Exception("Email ou senha inválidos");
+
+            if (usuario.StatusUsuario == false) throw new DomainException("Usuário Inativo");
 
             // comparar a senha digitada com a senha armazenada
             if (!VerificarSenha(loginDto.Senha, usuario.Senha)) throw new DomainException("Email ou senha inválidos");

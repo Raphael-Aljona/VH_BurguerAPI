@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VHBurguer.Applications.Services;
 using VHBurguer.Domains;
 using VHBurguer.DTOs.AutenticacaoDto;
+using VHBurguer.DTOs.UsuarioDto;
 using VHBurguer.Exceptions;
 
 namespace VHBurguer.Controllers
