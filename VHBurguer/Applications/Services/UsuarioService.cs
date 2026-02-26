@@ -49,7 +49,7 @@ namespace VHBurguer.Applications.Services
 
         private static void ValidarNome(string nome)
         {
-            if (string.IsNullOrWhiteSpace(nome) || !nome.Contains("@"))
+            if (string.IsNullOrWhiteSpace(nome))
             {
                 throw new DomainException("Nome Inválido.");
             }
