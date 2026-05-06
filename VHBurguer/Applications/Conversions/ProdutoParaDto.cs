@@ -21,6 +21,7 @@ namespace VHBurguer.Applications.Conversions
                 UsuarioID = produto.UsuarioID,
                 UsuarioNome = produto.Usuario?.Nome,
                 UsuarioEmail = produto.Usuario?.Email,
+                ImagemUrl = $"produto/{produto.ProdutoID}/imagem"
             };
         }
     }
