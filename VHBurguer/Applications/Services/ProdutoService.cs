@@ -1,4 +1,5 @@
-﻿using VHBurguer.Applications.Conversions;
+﻿using VHBurguer.Applications.ContentSafety;
+using VHBurguer.Applications.Conversions;
 using VHBurguer.Applications.Rules;
 using VHBurguer.Domains;
 using VHBurguer.DTOs.ProdutoDto;
@@ -10,10 +11,12 @@ namespace VHBurguer.Applications.Services
     public class ProdutoService
     {
         private readonly IProdutoRepository _repository;
+        private readonly IContentSafetyRepository _contentSafetyRepository;
 
-        public ProdutoService(IProdutoRepository repository)
+        public ProdutoService(IProdutoRepository repository, IContentSafetyRepository contentSafetyRepository)
         {
             _repository = repository;
+            _contentSafetyRepository = contentSafetyRepository;
         }
 
         public List<LerProdutoDto> Listar()
@@ -35,6 +38,20 @@ namespace VHBurguer.Applications.Services
             }
 
             return ProdutoParaDto.ConverterParaDto(produto);
+        }
+
+        private async Task ValidarConteudoProdutoAsync(string nome, string descricao)
+        {
+            string textoParaValidar = $@"
+                Nome do produto: {nome}
+                Descrição do produto: {descricao}";
+
+            var resultado = await _contentSafetyRepository.ValidarConteudo(textoParaValidar);
+
+            if (!resultado.aprovado)
+            {
+                throw new DomainException(resultado.msg);
+            }
         }
 
         private static void ValidarCadastro(CriarProdutoDto produtoDto)
@@ -66,9 +83,10 @@ namespace VHBurguer.Applications.Services
             return imagem;
         }
 
-        public LerProdutoDto Adicionar(CriarProdutoDto produtoDto, int id)
+        public async Task<LerProdutoDto> Adicionar(CriarProdutoDto produtoDto, int id)
         {
             ValidarCadastro(produtoDto);
+            await ValidarConteudoProdutoAsync(produtoDto.Nome, produtoDto.Descricao);
 
             if (_repository.NomeExiste(produtoDto.Nome))
             {

@@ -74,13 +74,13 @@ namespace VHBurguer.Controllers
         [Consumes("multipart/form-data")]
         [Authorize] // exige o login para adicionar uma nova imagem
 
-        public ActionResult AdicionarImagem([FromForm] CriarProdutoDto produtoDto)
+        public async Task<ActionResult> AdicionarImagem([FromForm] CriarProdutoDto produtoDto)
         {
             try
             {
                 int usuarioId = ObterUsuarioIdLogado();
 
-                _service.Adicionar(produtoDto, usuarioId);
+                await _service.Adicionar(produtoDto, usuarioId);
 
                 return StatusCode(201);
             }
